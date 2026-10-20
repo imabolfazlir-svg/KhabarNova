@@ -1,76 +1,400 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>خبرنوا | خبر فوری</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#111;color:white;font-family:Tahoma,Arial,sans-serif}
-header{background:#1b1b1b;padding:20px;text-align:center;border-bottom:3px solid #e50914}
-header h1{font-size:34px;margin:5px;color:#ff2029}
-header p{color:#ddd}
-nav{display:flex;justify-content:center;flex-wrap:wrap;background:#252525;padding:12px;gap:22px}
-nav a{color:white;text-decoration:none}
-nav a:hover{color:#ff3038}
-.container{max-width:900px;margin:auto;padding:15px}
-.breaking{background:#e50914;padding:14px;border-radius:8px;font-weight:bold;margin:15px 0}
-h2{border-right:4px solid #e50914;padding-right:10px}
-.card{background:#202020;padding:17px;border-radius:10px;margin:14px 0;border:1px solid #333}
-.card h3{margin-top:0;color:#ff4048}
-.card p{line-height:2;color:#ddd}
-.tag{color:#ff555b;font-size:13px}
-footer{text-align:center;background:#202020;padding:25px;color:#bbb;margin-top:30px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0759c7">
+  <meta name="description" content="خبرنوا؛ تازه‌ترین اخبار ایران و جهان">
+  <title>خبرنوا | تازه‌ترین اخبار ایران و جهان</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f3f7fc;
+      color: #17243b;
+      line-height: 1.9;
+    }
+    header {
+      background: linear-gradient(135deg, #0645a5, #1688ed);
+      color: white;
+      padding: 22px 16px;
+    }
+    .container { max-width: 1100px; margin: auto; padding: 0 16px; }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo { font-size: 30px; font-weight: bold; }
+    .tagline { font-size: 13px; opacity: .9; }
+    .search {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 0;
+      border-radius: 10px;
+      font: inherit;
+      outline-color: #1688ed;
+    }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 18px;
+      background: #fff;
+      color: #0759c7;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 16px 0;
+    }
+    nav button {
+      background: white;
+      border: 1px solid #d8e5f5;
+    }
+    nav button.active, nav button:hover {
+      background: #0759c7;
+      color: white;
+    }
+    .breaking {
+      background: #e3efff;
+      color: #0645a5;
+      padding: 12px 15px;
+      border-radius: 12px;
+      margin: 8px 0 22px;
+      font-weight: bold;
+    }
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title h2 { font-size: 21px; }
+    .muted { color: #687990; font-size: 13px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      padding-bottom: 30px;
+    }
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 22px #153e7210;
+      border: 1px solid #e7edf6;
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      background: #e3efff;
+    }
+    .card-content { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+    .category {
+      color: #0759c7;
+      background: #eaf3ff;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 12px;
+      align-self: flex-start;
+    }
+    .card h3 { font-size: 17px; line-height: 1.8; margin: 10px 0; }
+    .card p { font-size: 14px; color: #56677e; margin: 0 0 15px; }
+    .card-bottom {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .read {
+      background: #0759c7;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 13px;
+    }
+    .status {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      margin: 20px 0;
+      color: #52657d;
+    }
+    .error { color: #a12424; }
+    footer {
+      background: #082b5b;
+      color: #dce9ff;
+      padding: 25px 16px;
+      text-align: center;
+      font-size: 13px;
+    }
+    @media (max-width: 750px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .card img { height: 140px; }
+      .card-content { padding: 12px; }
+      .card h3 { font-size: 15px; }
+      .logo { font-size: 26px; }
+    }
+    @media (max-width: 460px) {
+      .grid { grid-template-columns: 1fr; }
+      .card img { height: 190px; }
+      .search button { padding: 10px; }
+    }
+  </style>
 </head>
 <body>
 <header>
-<h1>خبرنوا 📰</h1>
-<p>تازه‌ترین اخبار ایران و جهان</p>
+  <div class="container">
+    <div class="top">
+      <div>
+        <div class="logo">خبرنوا <span>📰</span></div>
+        <div class="tagline">باخبر باش؛ تازه‌ترین خبرها اینجاست</div>
+      </div>
+      <div id="today"></div>
+    </div>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search" placeholder="جست‌وجو در اخبار..." aria-label="جست‌وجو در اخبار">
+      <button type="submit">جست‌وجو 🔍</button>
+    </form>
+  </div>
 </header>
-<nav>
-<a href="#iran">ایران</a>
-<a href="#world">جهان</a>
-<a href="#accidents">حوادث</a>
-<a href="#about">درباره ما</a>
-</nav>
-<div class="container">
-<div class="breaking">🔴 خبرنوا | صدای تازه‌ترین رویدادها</div>
 
-<section id="iran">
-<h2>🇮🇷 اخبار ایران</h2>
-<div class="card">
-<span class="tag">اخبار ایران</span>
-<h3>آخرین خبرهای ایران</h3>
-<p>در این بخش تازه‌ترین اخبار ایران منتشر خواهد شد.</p>
-</div>
-</section>
+<main class="container">
+  <nav aria-label="دسته‌بندی اخبار" id="categories">
+    <button class="active" data-category="همه">همه اخبار</button>
+    <button data-category="ایران">ایران</button>
+    <button data-category="جهان">جهان</button>
+    <button data-category="اقتصاد">اقتصاد</button>
+    <button data-category="ورزش">ورزش</button>
+    <button data-category="فناوری">فناوری</button>
+    <button data-category="سلامت">سلامت</button>
+  </nav>
 
-<section id="world">
-<h2>🌍 اخبار جهان</h2>
-<div class="card">
-<span class="tag">اخبار جهان</span>
-<h3>رویدادهای مهم جهان</h3>
-<p>در این بخش خبرهای مهم جهان قرار می‌گیرند.</p>
-</div>
-</section>
+  <div class="breaking">🔵 خبرنوا | تازه‌ترین خبرها از منابع خبری</div>
 
-<section id="accidents">
-<h2>🚨 اخبار حوادث</h2>
-<div class="card">
-<span class="tag">حوادث</span>
-<h3>گزارش حوادث</h3>
-<p>در این بخش گزارش حوادث و اطلاعیه‌های معتبر منتشر می‌شوند.</p>
-</div>
-</section>
+  <div class="section-title">
+    <h2 id="heading">آخرین اخبار</h2>
+    <span class="muted" id="updated"></span>
+  </div>
 
-<section id="about">
-<h2>درباره خبرنوا</h2>
-<div class="card">
-<p>خبرنوا؛ رسانه‌ای برای دنبال کردن اخبار ایران، جهان و حوادث با تأکید بر منابع معتبر.</p>
-</div>
-</section>
-</div>
-<footer>© خبرنوا | KhabarNova</footer>
+  <div id="status" class="status">در حال دریافت اخبار...</div>
+  <section id="news" class="grid" aria-live="polite"></section>
+
+  <div class="status">
+    <strong>درباره خبرنوا</strong>
+    <p>خبرنوا بستری برای مشاهده و جست‌وجوی خبرها از منابع خبری است. برای مطالعه کامل هر خبر، به منبع اصلی مراجعه کنید.</p>
+  </div>
+</main>
+
+<footer>
+  <div>خبرنوا © <span id="year"></span></div>
+  <div>اخبار متعلق به منابع اصلی هستند؛ برای جزئیات به لینک هر منبع مراجعه کنید.</div>
+</footer>
+
+<script>
+  const newsBox = document.getElementById("news");
+  const statusBox = document.getElementById("status");
+  const searchInput = document.getElementById("searchInput");
+  let allNews = [];
+  let activeCategory = "همه";
+  let searchTerm = "";
+
+  document.getElementById("today").textContent =
+    new Intl.DateTimeFormat("fa-IR", {dateStyle:"medium"}).format(new Date());
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // منبع RSS عمومی؛ ممکن است در بعضی شبکه‌ها در دسترس نباشد.
+  const feeds = [
+    {name:"BBC فارسی", url:"https://feeds.bbci.co.uk/persian/rss.xml", category:"ایران"},
+    {name:"DW فارسی", url:"https://rss.dw.com/rdf/rss-fa-all", category:"جهان"},
+    {name:"Google News ایران", url:"https://news.google.com/rss/search?q=ایران&hl=fa&gl=IR&ceid=IR:fa", category:"ایران"},
+    {name:"Google News جهان", url:"https://news.google.com/rss/search?q=اخبار+جهان&hl=fa&gl=IR&ceid=IR:fa", category:"جهان"},
+    {name:"Google News اقتصاد", url:"https://news.google.com/rss/search?q=اقتصاد&hl=fa&gl=IR&ceid=IR:fa", category:"اقتصاد"},
+    {name:"Google News ورزش", url:"https://news.google.com/rss/search?q=ورزش&hl=fa&gl=IR&ceid=IR:fa", category:"ورزش"},
+    {name:"Google News فناوری", url:"https://news.google.com/rss/search?q=فناوری&hl=fa&gl=IR&ceid=IR:fa", category:"فناوری"},
+    {name:"Google News سلامت", url:"https://news.google.com/rss/search?q=سلامت&hl=fa&gl=IR&ceid=IR:fa", category:"سلامت"}
+  ];
+
+  function cleanText(value) {
+    const el = document.createElement("div");
+    el.innerHTML = value || "";
+    return (el.textContent || "").trim();
+  }
+
+  function getImage(item) {
+    const media = item.querySelector("media\\:content, content");
+    if (media && media.getAttribute("url")) return media.getAttribute("url");
+    const enclosure = item.querySelector("enclosure");
+    if (enclosure && enclosure.getAttribute("url")) return enclosure.getAttribute("url");
+    const html = item.querySelector("description")?.textContent || "";
+    const match = html.match(/<img[^>]+src=["']([^"']+)/i);
+    return match ? match[1] : "";
+  }
+
+  function render() {
+    newsBox.innerHTML = "";
+    const filtered = allNews.filter(n => {
+      const matchesCategory = activeCategory === "همه" || n.category === activeCategory;
+      const matchesSearch = (n.title + " " + n.summary + " " + n.source)
+        .toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+
+    if (!filtered.length) {
+      statusBox.style.display = "block";
+      statusBox.textContent = allNews.length
+        ? "خبری با این جست‌وجو یا دسته‌بندی پیدا نشد."
+        : "هنوز خبری دریافت نشده است. اتصال اینترنت یا دسترسی منبع اخبار را بررسی کنید.";
+      return;
+    }
+
+    statusBox.style.display = "none";
+    filtered.forEach(n => {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      if (n.image) {
+        const img = document.createElement("img");
+        img.src = n.image;
+        img.alt = "";
+        img.loading = "lazy";
+        img.onerror = () => img.remove();
+        card.appendChild(img);
+      }
+
+      const content = document.createElement("div");
+      content.className = "card-content";
+
+      const category = document.createElement("span");
+      category.className = "category";
+      category.textContent = n.category;
+
+      const title = document.createElement("h3");
+      title.textContent = n.title;
+
+      const summary = document.createElement("p");
+      summary.textContent = n.summary || "برای خواندن جزئیات خبر به منبع اصلی مراجعه کنید.";
+
+      const bottom = document.createElement("div");
+      bottom.className = "card-bottom";
+
+      const source = document.createElement("span");
+      source.className = "muted";
+      source.textContent = n.source;
+
+      const link = document.createElement("a");
+      link.className = "read";
+      link.href = n.link;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "متن کامل خبر ←";
+
+      bottom.append(source, link);
+      content.append(category, title, summary, bottom);
+      card.appendChild(content);
+      newsBox.appendChild(card);
+    });
+  }
+
+  async function loadFeed(feed) {
+    const proxy = "https://api.allorigins.win/raw?url=" + encodeURIComponent(feed.url);
+    const response = await fetch(proxy);
+    if (!response.ok) throw new Error("Feed unavailable");
+    const xmlText = await response.text();
+    const xml = new DOMParser().parseFromString(xmlText, "text/xml");
+    if (xml.querySelector("parsererror")) throw new Error("Invalid RSS");
+    return Array.from(xml.querySelectorAll("item, entry")).map(item => {
+      const title = cleanText(item.querySelector("title")?.textContent);
+      const linkNode = item.querySelector("link");
+      const link = linkNode?.textContent?.trim() ||
+        linkNode?.getAttribute("href") || "";
+      const description = item.querySelector("description, summary, content")?.textContent || "";
+      const summary = cleanText(description).slice(0, 240);
+      const date = item.querySelector("pubDate, published, updated")?.textContent || "";
+      return {
+        title, link, summary, date, image: getImage(item),
+        source: feed.name, category: feed.category
+      };
+    }).filter(n => n.title && n.link && /^https?:\/\//i.test(n.link));
+  }
+
+  async function refreshNews() {
+    statusBox.style.display = "block";
+    statusBox.className = "status";
+    statusBox.textContent = "در حال دریافت تازه‌ترین اخبار...";
+    try {
+      const results = await Promise.allSettled(feeds.map(loadFeed));
+      const combined = results.flatMap(r => r.status === "fulfilled" ? r.value : []);
+      const unique = new Map();
+      combined.forEach(n => {
+        const key = n.title.replace(/\s+/g, " ").trim().toLowerCase();
+        if (!unique.has(key)) unique.set(key, n);
+      });
+
+      allNews = Array.from(unique.values()).sort((a,b) => {
+        const da = Date.parse(a.date) || 0;
+        const db = Date.parse(b.date) || 0;
+        return db - da;
+      });
+
+      document.getElementById("updated").textContent =
+        "آخرین بررسی: " + new Date().toLocaleTimeString("fa-IR", {hour:"2-digit", minute:"2-digit"});
+
+      if (!allNews.length) {
+        statusBox.textContent =
+          "دریافت اخبار موفق نبود. ممکن است سرویس واسط یا منابع خبری موقتاً در دسترس نباشند.";
+        return;
+      }
+      render();
+    } catch (error) {
+      statusBox.className = "status error";
+      statusBox.textContent = "خطا در دریافت اخبار. لطفاً اتصال اینترنت را بررسی کنید.";
+    }
+  }
+
+  document.getElementById("categories").addEventListener("click", event => {
+    const button = event.target.closest("button[data-category]");
+    if (!button) return;
+    activeCategory = button.dataset.category;
+    document.querySelectorAll("#categories button").forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+    document.getElementById("heading").textContent =
+      activeCategory === "همه" ? "آخرین اخبار" : "اخبار " + activeCategory;
+    render();
+  });
+
+  document.getElementById("searchForm").addEventListener("submit", event => {
+    event.preventDefault();
+    searchTerm = searchInput.value.trim();
+    render();
+  });
+
+  searchInput.addEventListener("input", () => {
+    searchTerm = searchInput.value.trim();
+    render();
+  });
+
+  refreshNews();
+  setInterval(refreshNews, 10 * 60 * 1000);
+</script>
 </body>
 </html>
